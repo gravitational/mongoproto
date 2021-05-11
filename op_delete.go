@@ -29,7 +29,7 @@ func (op *OpDelete) String() string {
 	if err := bson.Unmarshal(op.Selector, &query); err != nil {
 		return "(error unmarshalling)"
 	}
-	queryAsJSON, err := bsonutil.ConvertBSONValueToJSON(query)
+	queryAsJSON, err := bsonutil.ConvertBSONValueToLegacyExtJSON(query)
 	if err != nil {
 		return fmt.Sprintf("ConvertBSONValueToJSON err: %#v - %v", op, err)
 	}
@@ -60,7 +60,7 @@ func (op *OpDelete) FromReader(r io.Reader) error {
 	if err != nil {
 		return err
 	}
-	if int(op.Header.MessageLength) > len(op.Selector) + len(op.FullCollectionName) + 1 + 8 + MsgHeaderLen {
+	if int(op.Header.MessageLength) > len(op.Selector)+len(op.FullCollectionName)+1+8+MsgHeaderLen {
 		data, err := ReadDocument(r)
 		if err != nil {
 			return err

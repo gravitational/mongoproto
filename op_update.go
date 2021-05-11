@@ -35,7 +35,7 @@ func (op *OpUpdate) String() string {
 	if err := bson.Unmarshal(op.Selector, &doc); err != nil {
 		return "(error unmarshalling selector data)"
 	}
-	selectorJsonDoc, err := bsonutil.ConvertBSONValueToJSON(doc)
+	selectorJsonDoc, err := bsonutil.ConvertBSONValueToLegacyExtJSON(doc)
 	if err != nil {
 		return fmt.Sprintf("ConvertBSONValueToJSON err: %#v - %v", op, err)
 	}
@@ -46,7 +46,7 @@ func (op *OpUpdate) String() string {
 	if err := bson.Unmarshal(op.Update, &doc); err != nil {
 		return "(error unmarshalling update data)"
 	}
-	updateJsonDoc, err := bsonutil.ConvertBSONValueToJSON(doc)
+	updateJsonDoc, err := bsonutil.ConvertBSONValueToLegacyExtJSON(doc)
 	if err != nil {
 		return fmt.Sprintf("ConvertBSONValueToJSON err: %#v - %v", op, err)
 	}

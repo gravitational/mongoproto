@@ -33,7 +33,7 @@ func (op *OpInsert) String() string {
 	var doc interface{}
 	for _, d := range op.Documents {
 		_ = bson.Unmarshal(d, &doc)
-		jsonDoc, err := bsonutil.ConvertBSONValueToJSON(doc)
+		jsonDoc, err := bsonutil.ConvertBSONValueToLegacyExtJSON(doc)
 		if err != nil {
 			return fmt.Sprintf("%#v - %v", op, err)
 		}

@@ -40,7 +40,7 @@ func (op *OpQuery) String() string {
 	if err := bson.Unmarshal(op.Query, &query); err != nil {
 		return "(error unmarshalling)"
 	}
-	queryAsJSON, err := bsonutil.ConvertBSONValueToJSON(query)
+	queryAsJSON, err := bsonutil.ConvertBSONValueToLegacyExtJSON(query)
 	if err != nil {
 		return fmt.Sprintf("ConvertBSONValueToJSON err: %#v - %v", op, err)
 	}
